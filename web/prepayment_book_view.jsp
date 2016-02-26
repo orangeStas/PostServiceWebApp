@@ -34,10 +34,10 @@
         </c:if>
 
         <h2>Client name:</h2>
-        <input type="text" name="client_name" value="${prepayment_book.clientName}">
+        <input type="text" name="client_name" value="${prepayment_book.clientName}" placeholder="Полищук Д.А." maxlength="45">
 
         <h2>Client number:</h2>
-        <input type="text" name="client_number" value="${prepayment_book.clientNumber}">
+        <input type="text" name="client_number" value="${prepayment_book.clientNumber}" placeholder="28" maxlength="7">
 
         <h2>Passport ID:</h2>
         <p>
@@ -56,13 +56,13 @@
         </p>
 
         <h2>Unpaid cost:</h2>
-        <input type="text" name="unpaid_cost" value="${prepayment_book.unpaidCost}">
+        <input type="text" name="unpaid_cost" value="${prepayment_book.unpaidCost}" placeholder="50000" maxlength="10">
 
         <h2>Head of organization (name):</h2>
-        <input type="text" name="organization_head_name" value="${prepayment_book.organizationHeadName}">
+        <input type="text" name="organization_head_name" value="${prepayment_book.organizationHeadName}" placeholder="Цивако К.А." maxlength="45">
 
         <h2>Bookkeeper:</h2>
-        <input type="text" name="bookkeeper_name" value="${prepayment_book.bookkeeperName}">
+        <input type="text" name="bookkeeper_name" value="${prepayment_book.bookkeeperName}" placeholder="Стасюкевич С.Ю." maxlength="45">
 
         <h2>Date:</h2>
         <input type="date" name="date" value="${prepayment_book.date}">
