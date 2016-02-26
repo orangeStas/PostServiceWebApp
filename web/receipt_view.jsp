@@ -32,16 +32,16 @@
         </c:if>
 
         <h2>Client name:</h2>
-        <input type="text" name="receipt_clientname" value="${receipt.clientName}">
+        <input type="text" name="receipt_clientname" value="${receipt.clientName}" placeholder="Полищук Д.А." maxlength="45">
 
         <h2>Service:</h2>
-        <input type="text" name="receipt_service" value="${receipt.serviceName}">
+        <input type="text" name="receipt_service" value="${receipt.serviceName}" placeholder="МТС" maxlength="45">
 
         <h2>Payment data:</h2>
-        <input type="text" name="receipt_payment_data" value="${receipt.paymentData}">
+        <input type="text" name="receipt_payment_data" value="${receipt.paymentData}" placeholder="375291234567 Полищук" maxlength="45">
 
         <h2>Cost:</h2>
-        <input type="text" name="receipt_cost" value="${receipt.cost}">
+        <input type="text" name="receipt_cost" value="${receipt.cost}" placeholder="100000" maxlength="10">
 
         <h2>Date:</h2>
         <input type="date" name="receipt_date" value="${receipt.date}">
