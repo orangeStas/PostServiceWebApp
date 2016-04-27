@@ -38,8 +38,7 @@
                 <td>${userr.email}</td>
                 <td>${userr.userRole}</td>
                 <td>
-                    <form action="controller" enctype="multipart/form-data" method="get">
-                        <input type="hidden" name="command" value="select_user">
+                    <form action="selectUser.action" enctype="multipart/form-data" method="get">
                         <input type="hidden" name="user_id" value="${userr.id}">
                         <input type="submit" value="просмотреть">
                     </form>

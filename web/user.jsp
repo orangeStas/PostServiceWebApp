@@ -15,8 +15,7 @@
 </head>
 <body>
 
-<form action="controller" method="get" enctype="multipart/form-data">
-    <input type="hidden" name="command" value="load_users">
+<form action="loadUsers.action" method="get" enctype="multipart/form-data">
     <input type="submit" value="назад">
 </form>
 

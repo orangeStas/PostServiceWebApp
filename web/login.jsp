@@ -8,15 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Вход</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-<h1>Вход:</h1>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="header.jsp" />
 
-<form method="POST" action="controller">
+<%--<form method="POST" action="controller">
     <input type="hidden" name="command" value="login_command">
 
     <div>
@@ -32,8 +27,17 @@
     <c:if test="${not empty param['message']}">
         <p>invalid login or password</p>
     </c:if>
-</form>
+</form>--%>
+
+<s:form action="login" method="post">
+    <s:textfield name="login" label="Логин"/>
+    <s:password name="password" label="Пароль"/>
+    <s:submit value="Войти"/>
+    <s:actionmessage/>
+    <s:actionerror/>
+</s:form>
+
 
 <a href="registration.jsp">Зарегистрироваться</a>
-</body>
-</html>
+
+<jsp:include page="footer.jsp" />

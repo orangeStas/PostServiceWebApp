@@ -5,7 +5,7 @@
          version="3.1">
 
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>by.bsuir.spp.controller.Controller</servlet-class>
     </servlet>
@@ -24,6 +24,22 @@
         <url-pattern>/doccontroller</url-pattern>
     </servlet-mapping>
 
+
+
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>-->
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>by.bsuir.spp.listener.ConnectionProviderListener</listener-class>
     </listener>
@@ -32,7 +48,7 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
-    <filter>
+    <!--<filter>
         <display-name>CharsetFilter</display-name>
         <filter-name>CharsetFilter</filter-name>
         <filter-class>by.bsuir.spp.filter.CharsetFilter</filter-class>
@@ -83,7 +99,7 @@
     <filter-mapping>
         <filter-name>SessionFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
 </web-app>
