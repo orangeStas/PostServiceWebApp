@@ -11,33 +11,49 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <jsp:include page="header.jsp" />
 
-<%--<form method="POST" action="controller">
-    <input type="hidden" name="command" value="login_command">
 
-    <div>
-        <input type="text" name="login_field" id="loginInput" placeholder="Логин">
+<nav class="nav-wrapper blue darken-1">
+    <a href="/login.jsp" class="brand-logo">ПАШТОВЫ СЕРВИС</a>
+
+    <div class="row right">
+        <a href="/login.jsp" class="waves-effect waves-light btn"><i class="material-icons auth">input</i></a>
+        <a href="/registration.jsp" class="waves-effect waves-light btn deep-orange lighten-1"><i class="material-icons auth">person_add</i></a>
     </div>
+</nav>
 
-    <div>
-        <input type="password" name="password" id="passwordInput" placeholder="Пароль">
-    </div>
+<div class="row container">
+    <h3>Авторизация</h3>
 
-    <button type="submit">Войти</button>
+    <%--<s:form cssClass="col s12 login" action="login" method="post">
+        <s:textfield name="login" label="Логин"/>
+        <s:password name="password" label="Пароль"/>
+        <s:submit value="Войти"/>
+        <s:actionmessage/>
+        <s:actionerror/>
+    </s:form>--%>
+    <form class="col s12 login" method="POST" action="login.action">
 
-    <c:if test="${not empty param['message']}">
-        <p>invalid login or password</p>
-    </c:if>
-</form>--%>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix register">email</i>
+                <input type="text" class="validate" name="login" id="loginInput">
+                <label for="loginInput">Login</label>
+            </div>
 
-<s:form action="login" method="post">
-    <s:textfield name="login" label="Логин"/>
-    <s:password name="password" label="Пароль"/>
-    <s:submit value="Войти"/>
-    <s:actionmessage/>
-    <s:actionerror/>
-</s:form>
+            <div class="input-field col s6">
+                <i class="material-icons prefix register">vpn_key</i>
+                <input type="password" class="validate" name="password" id="passwordInput">
+                <label for="passwordInput">Пароль</label>
+            </div>
+        </div>
+        <div class="row">
+            <button class="right btn waves-effect waves-light" type="submit" name="action">
+                <i class="material-icons">check</i>
+            </button>
+        </div>
 
+    </form> <!-- End register form -->
 
-<a href="registration.jsp">Зарегистрироваться</a>
+</div>
 
 <jsp:include page="footer.jsp" />

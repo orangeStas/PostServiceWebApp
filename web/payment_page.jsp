@@ -33,7 +33,7 @@
     <hr>
 
     <h2>Введите данные вашей кредитной карты:</h2>
-    <form action="controller" method="get" enctype="multipart/form-data">
+    <form action="payment.action" method="get" enctype="multipart/form-data">
         <input type="hidden" name="command" value="payment_command">
         <table>
             <tr>

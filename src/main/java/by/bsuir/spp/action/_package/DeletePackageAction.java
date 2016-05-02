@@ -6,20 +6,20 @@ import by.bsuir.spp.exception.dao.DaoException;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeletePackageAction extends ActionSupport {
-    private int packageId;
+    private String packageId;
 
-    public int getPackageId() {
+    public String getPackageId() {
         return packageId;
     }
 
-    public void setPackageId(int packageId) {
+    public void setPackageId(String packageId) {
         this.packageId = packageId;
     }
 
     @Override
     public String execute() throws Exception {
         by.bsuir.spp.bean.document.Package myPackage = new by.bsuir.spp.bean.document.Package();
-        myPackage.setIdPackage(getPackageId());
+        myPackage.setIdPackage(Integer.parseInt(getPackageId()));
 
         PackageDao packageDao = MySqlPackageDao.getInstance();
 

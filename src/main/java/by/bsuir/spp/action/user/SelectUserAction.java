@@ -1,5 +1,6 @@
 package by.bsuir.spp.action.user;
 
+import by.bsuir.spp.bean.Passport;
 import by.bsuir.spp.bean.User;
 import by.bsuir.spp.bean.UserType;
 import by.bsuir.spp.dao.PassportDao;
@@ -15,6 +16,24 @@ public class SelectUserAction extends ActionSupport {
     private User userr;
     private int admins_count;
     private String user_id;
+    private List<Passport> passports;
+    private UserType[] user_roles;
+
+    public List<Passport> getPassports() {
+        return passports;
+    }
+
+    public void setPassports(List<Passport> passports) {
+        this.passports = passports;
+    }
+
+    public UserType[] getUser_roles() {
+        return user_roles;
+    }
+
+    public void setUser_roles(UserType[] user_roles) {
+        this.user_roles = user_roles;
+    }
 
     public String getUser_id() {
         return user_id;
@@ -56,6 +75,10 @@ public class SelectUserAction extends ActionSupport {
             e.printStackTrace();
         }
 
+        List<Passport> passports = passportDao.getAllPassports();
+
+        setPassports(passports);
+        setUser_roles(UserType.values());
         setUserr(user);
         setAdmins_count(getAdminsCount(userDao.getAllUsers()));
 

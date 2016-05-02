@@ -9,6 +9,15 @@ import java.util.List;
 public class LoadPackagesAction extends ActionSupport {
 
     private List<Package> packages;
+    private List<Integer> new_package_ids;
+
+    public List<Integer> getNew_package_ids() {
+        return new_package_ids;
+    }
+
+    public void setNew_package_ids(List<Integer> new_package_ids) {
+        this.new_package_ids = new_package_ids;
+    }
 
     public List<Package> getPackages() {
         return packages;
@@ -22,6 +31,10 @@ public class LoadPackagesAction extends ActionSupport {
     public String execute() throws Exception {
         packages = MySqlPackageDao.getInstance().getAllPackages();
         setPackages(packages);
+
+        new_package_ids = MySqlPackageDao.getInstance().getNewPackageIds();
+        setNew_package_ids(new_package_ids);
+
         return SUCCESS;
     }
 }

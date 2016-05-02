@@ -66,4 +66,5 @@ public class LoadUsersAction extends ActionSupport {
 
         return count;
     }
+
 }

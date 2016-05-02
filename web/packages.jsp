@@ -10,80 +10,117 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<html>
-<head>
-    <title>Посылки</title>
-</head>
-<body>
-<h1>Список посылок</h1>
-<c:choose>
-    <c:when test="${user.userRole == 'ADMIN'}">
-        <a href="home_admin.jsp">домой</a>
-    </c:when>
-    <c:otherwise>
-        <form action="home_manager.jsp">
-            <input type="submit" value="домой">
-        </form>
-    </c:otherwise>
-</c:choose>
 
-<table align="center" border="2">
-    <tr>
-        <th>Тип посылки</th>
-        <th>Дата</th>
-        <th>Отправитель</th>
-        <th>Получатель</th>
-        <th>Адрес</th>
-        <th>Почтовый индекс</th>
-        <th>Статус</th>
-    </tr>
 
-    <s:iterator value="packages">
-    <tr>
-        <td><s:property value="type"/></td>
-        <td><s:property value="date"/></td>
-        <td><s:property value="senderName"/></td>
-        <td><s:property value="getterUser.secondName"/> <s:property value="getterUser.firstName"/></td>
-        <td><s:property value="address"/></td>
-        <td><s:property value="postIndex"/></td>
-        <td><s:property value="status"/></td>
-        <td>
-            <s:url id="selectPack" action="selectPackage" namespace="/admin">
-                <s:param name="packageId" value="%{idPackage}"></s:param>
-            </s:url>
-            <s:a href="%{selectPack}">просмотреть</s:a>
+<jsp:include page="header.jsp" />
+<jsp:include page="menu.jsp"/>
 
-            <s:if test="%{deleted == true}">
-                <p>удалена</p>
-            </s:if>
-            <s:else>
-                <s:url id="deletePack" action="deletePackage" namespace="/admin">
-                    <s:param name="packageId" value="%{idPackage}"></s:param>
-                </s:url>
-                <s:a href="%{deletePack}">удалить</s:a>
-            </s:else>
+<div class="container">
+    <h3>Посылки</h3>
 
-            <c:if test="${(user.userRole == 'POST_MANAGER')}">
-                <c:forEach var="pack_id" items="${new_package_ids}">
-                    <c:if test="${pack_id == packagee.idPackage}">
-                        <form action="controller" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="command" value="PREPARE_DATA_FOR_CREATION_ADVERTISEMENT">
-                            <input type="hidden" name="package_id" value="${packagee.idPackage}">
-                            <input type="submit" value="создать извещение">
-                        </form>
+    <ul class="collapsible" data-collapsible="expandable">
+        <c:forEach var="packagee" items="${packages}">
+            <li>
+                <div class="collapsible-header">
+                    <div class="row item-header">
+                        <span class="col offset-s1 s6"><b>Код отслеживания:</b> ${packagee.trackNumber} </span>
+                        <c:if test="${packagee.deleted == true}">
+                            <span class="col s3 offset-s1"><b>Статус:</b> Удалена </span>
+                        </c:if>
+                        <c:if test="${packagee.deleted == false}">
+                            <span class="col s3 offset-s1"><b>Статус:</b> ${packagee.status} </span>
+                        </c:if>
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </div>
+                </div>
+                <div class="collapsible-body item">
+                    <div class="row">
+                        <span class="col s6 offset-s1"><b>Тип посылки:</b> ${packagee.type}</span>
+                        <span class="col s3 offset-s1 package-align"><b>Дата:</b> ${packagee.date}</span>
 
-                        <form action="controller" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="command" value="reject_package">
-                            <input type="hidden" name="package_id" value="${packagee.idPackage}">
-                            <input type="submit" value="отклонить">
-                        </form>
-                    </c:if>
-                </c:forEach>
-            </c:if>
-        </td>
-    </tr>
-    </s:iterator>
-</table>
+                        <a class="waves-effect waves-light btn col s1 dropdown-button" data-activates='dropdown${packagee.idPackage}'><i class="material-icons">file_download</i></a>
 
-</body>
-</html>
+                        <s:url action="downloadPackageDoc" var="xlsUrl">
+                            <s:param name="doc_type">xls</s:param>
+                            <s:param name="package_id">${packagee.idPackage}</s:param>
+                        </s:url>
+
+                        <s:url action="downloadPackageDoc" var="pdfUrl">
+                            <s:param name="doc_type">pdf</s:param>
+                            <s:param name="package_id">${packagee.idPackage}</s:param>
+                        </s:url>
+
+                        <s:url action="downloadPackageDoc" var="csvUrl">
+                            <s:param name="doc_type">csv</s:param>
+                            <s:param name="package_id">${packagee.idPackage}</s:param>
+                        </s:url>
+
+                        <ul id='dropdown${packagee.idPackage}' class='dropdown-content'>
+                            <li>
+                                <s:a href="%{xlsUrl}">XLS</s:a>
+                            </li>
+                            <li>
+                                <s:a href="%{pdfUrl}">PDF</s:a>
+                            </li>
+                            <li>
+                                <s:a href="%{csvUrl}">CSV</s:a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="row">
+                        <span class="col s6 offset-s1"><b>Отправитель:</b> ${packagee.senderName}</span>
+                        <span class="col s3 package-align"><b>Получатель:</b> ${packagee.getterUser.secondName} ${packagee.getterUser.firstName}</span>
+
+                        <c:if test="${packagee.deleted == false}">
+                            <form action="deletePackage.action" method="post">
+                                <input type="hidden" name="packageId" value="${packagee.idPackage}">
+                                <button type="submit" class="waves-effect waves-light btn col s1 red lighten-1">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </form>
+                        </c:if>
+                    </div>
+
+                    <div class="row">
+                        <span class="col s6 offset-s1"><b>Почтовый индекс:</b> ${packagee.postIndex}</span>
+                        <span class="col s3 package-align"><b>Адрес:</b> ${packagee.address} </span>
+
+                        <c:if test="${(user.userRole == 'POST_MANAGER')}">
+                            <c:forEach var="pack_id" items="${new_package_ids}">
+                                <c:if test="${pack_id == packagee.idPackage}">
+                                    <a class="waves-effect waves-light btn col s1 dropdown-button" data-activates='managerdropdown${packagee.idPackage}'><i class="material-icons">check</i></a>
+
+                                    <s:url namespace="/managerr" action="prepareDataForAdvertisementCreation" var="addAdvertisementUrl">
+                                        <s:param name="package_id">${packagee.idPackage}</s:param>
+                                    </s:url>
+
+                                    <s:url namespace="/managerr" action="rejectPackage" var="rejectPackUrl">
+                                        <s:param name="package_id">${packagee.idPackage}</s:param>
+                                    </s:url>
+
+                                    <ul id='managerdropdown${packagee.idPackage}' class='dropdown-content'>
+                                        <li>
+                                            <s:a href="%{addAdvertisementUrl}">
+                                                <i class="material-icons">check</i>
+                                            </s:a>
+                                        </li>
+                                        <li>
+                                            <s:a href="%{rejectPackUrl}">
+                                                <i class="material-icons">close</i>
+                                            </s:a>
+                                        </li>
+                                    </ul>
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
+
+                    </div>
+
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+
+<jsp:include page="footer.jsp" />

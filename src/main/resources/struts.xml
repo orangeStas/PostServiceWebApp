@@ -6,20 +6,36 @@
 
 <struts>
 
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="true"/>
     <constant name="struts.convention.result.path" value="/"/>
-    
+
     <package name="user" namespace="/" extends="struts-default">
         <interceptors>
             <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="rolesInterceptor" class="by.bsuir.spp.interceptor.RolesInterceptor"/>
             <interceptor-stack name="authStack">
                 <interceptor-ref name="authentication"/>
+                <interceptor-ref name="rolesInterceptor">
+                    <param name="roleActions">
+                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
+                        admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
+                        manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
+                    </param>
+                </interceptor-ref>
                 <interceptor-ref name="modelDriven"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
         </interceptors>
 
+        <default-interceptor-ref name="authStack"/>
+
+        <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+        </global-results>
+
         <action name="login" class="by.bsuir.spp.action.LoginAction" method="execute">
+            <interceptor-ref name="defaultStack"/>
             <result name="redirect" type="redirect">
                 <param name="location">${url}</param>
             </result>
@@ -27,9 +43,114 @@
             <result name="input">/login.jsp</result>
             <result name="error">/login.jsp</result>
         </action>
+
+        <action name="logout" class="by.bsuir.spp.action.LogoutAction" method="execute">
+            <result name="success" type="redirect">/login.jsp</result>
+        </action>
+
+        <action name="registration" class="by.bsuir.spp.action.RegistrationAction" method="execute">
+            <interceptor-ref name="defaultStack"/>
+            <result name="success">/login.jsp</result>
+            <result name="error">/registration.jsp</result>
+        </action>
+
+        <action name="downloadPackageDoc" class="by.bsuir.spp.action._package.DownloadPackageDocAction"
+                method="execute">
+            <result name="input"></result>
+        </action>
+
+        <action name="downloadAdvertisementDoc" class="by.bsuir.spp.action.advertisement.DownloadAdvertisementDocAction"
+                method="execute">
+            <result name="input"></result>
+        </action>
+
+        <action name="downloadPrepaymentBookDoc"
+                class="by.bsuir.spp.action.prepaymentbook.DownloadPrepaymentBookDocAction" method="execute">
+            <result name="input"></result>
+        </action>
+
+        <action name="downloadReceiptDoc" class="by.bsuir.spp.action.receipt.DownloadReceiptDocAction" method="execute">
+            <result name="input"></result>
+        </action>
+
+        <action name="downloadSearchStatementDoc"
+                class="by.bsuir.spp.action.searchstatement.DownloadSearchStatementDocAction" method="execute">
+            <result name="input"></result>
+        </action>
+
+        <action name="selectAdvertisement" class="by.bsuir.spp.action.advertisement.SelectAdvertisementAction"
+                method="execute">
+            <result name="success">/advertisement_view.jsp</result>
+        </action>
+
+        <action name="deleteAdvertisement" class="by.bsuir.spp.action.advertisement.DeleteAdvertisementAction"
+                method="execute">
+            <result name="client" type="redirect">loadUserAdvertisements</result>
+            <result name="admin" type="redirect">loadAdvertisements</result>
+            <result name="manager" type="redirect">loadAdvertisements</result>
+        </action>
+
+        <action name="deleteReceipt" class="by.bsuir.spp.action.receipt.DeleteReceiptAction" method="execute">
+            <result name="admin" type="redirect">loadReceipts</result>
+            <result name="client" type="redirect">loadUserReceipts</result>
+        </action>
+
+        <action name="selectPrepaymentBook" class="by.bsuir.spp.action.prepaymentbook.SelectPrepaymentBookAction"
+                method="execute">
+            <result name="success">/prepayment_book_view.jsp</result>
+        </action>
+
+        <action name="deletePrepaymentBook" class="by.bsuir.spp.action.prepaymentbook.DeletePrepaymentBookAction"
+                method="execute">
+            <result name="admin" type="redirect">loadPrepaymentBooks</result>
+            <result name="manager" type="redirect">loadPrepaymentBooks</result>
+        </action>
+
+        <action name="updatePrepaymentBook" class="by.bsuir.spp.action.prepaymentbook.UpdatePrepaymentBookAction"
+                method="execute">
+            <result name="success" type="redirect">loadPrepaymentBooks</result>
+        </action>
+
+        <action name="updateSearchStatement" class="by.bsuir.spp.action.searchstatement.UpdateSearchStatementAction" method="execute">
+            <result name="admin" type="redirect">/admin/loadSearchStatements.action</result>
+            <result name="manager" type="redirect">/managerr/loadSearchStatements.action</result>
+        </action>
+
+        <action name="deleteSearchStatement" class="by.bsuir.spp.action.searchstatement.DeleteSearchStatementAction" method="execute">
+            <result name="success" type="redirect">/admin/loadSearchStatements.action</result>
+        </action>
+
+        <action name="selectSearchStatement" class="by.bsuir.spp.action.searchstatement.SelectSearchStatementAction" method="execute">
+            <result name="success">/search_statement_view.jsp</result>
+        </action>
     </package>
 
     <package name="admin" namespace="/admin" extends="user">
+
+        <interceptors>
+            <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="rolesInterceptor" class="by.bsuir.spp.interceptor.RolesInterceptor"/>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentication"/>
+                <interceptor-ref name="rolesInterceptor">
+                    <param name="roleActions">
+                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
+                        admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
+                        manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="authStack"/>
+
+        <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+        </global-results>
+
         <action name="loadPackages" class="by.bsuir.spp.action._package.LoadPackagesAction" method="execute">
             <result name="success">/packages.jsp</result>
         </action>
@@ -49,9 +170,198 @@
         </action>
 
         <action name="selectUser" class="by.bsuir.spp.action.user.SelectUserAction" method="execute">
-            <result name="success">/user.jsp</result>
+            <result name="success">/user_view.jsp</result>
+        </action>
+
+        <action name="deleteUser" class="by.bsuir.spp.action.user.DeleteUserAction" method="execute">
+            <result name="success" type="chain">loadUsers</result>
+        </action>
+
+        <action name="updateUser" class="by.bsuir.spp.action.user.UpdateUserAction" method="execute">
+            <result name="success" type="chain">loadUsers</result>
+        </action>
+
+        <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+            <result name="success">/receipts.jsp</result>
+        </action>
+
+        <action name="loadAdvertisements" class="by.bsuir.spp.action.advertisement.LoadAdvertisementsAction"
+                method="execute">
+            <result name="success">/advertisements.jsp</result>
+        </action>
+
+        <action name="loadSearchStatements" class="by.bsuir.spp.action.searchstatement.LoadSearchStatementsAction"
+                method="execute">
+            <result name="success">/search_statements.jsp</result>
+        </action>
+
+        <action name="loadPrepaymentBooks" class="by.bsuir.spp.action.prepaymentbook.LoadPrepaymentBooksAction"
+                method="execute">
+            <result name="success">/prepayment_books.jsp</result>
+        </action>
+
+        <action name="updateAdvertisement" class="by.bsuir.spp.action.advertisement.UpdateAdvertisementAction"
+                method="execute">
+            <result name="success" type="chain">loadAdvertisements</result>
         </action>
 
     </package>
+
+    <package name="client" namespace="/client" extends="user">
+
+        <interceptors>
+            <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="rolesInterceptor" class="by.bsuir.spp.interceptor.RolesInterceptor"/>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentication"/>
+                <interceptor-ref name="rolesInterceptor">
+                    <param name="roleActions">
+                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
+                        admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
+                        manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="authStack"/>
+
+        <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+        </global-results>
+
+        <action name="loadUserPackages" class="by.bsuir.spp.action._package.LoadUserPackagesAction" method="execute">
+            <interceptor-ref name="roles">
+                <param name="allowedRoles">admin</param>
+            </interceptor-ref>
+            <result name="success">/user_packages.jsp</result>
+        </action>
+
+        <action name="addPackage" class="by.bsuir.spp.action._package.AddPackageAction" method="execute">
+            <result name="success" type="chain">loadUserPackages</result>
+        </action>
+
+        <action name="prepareDataForPackageCreation"
+                class="by.bsuir.spp.action._package.PrepareDataForPackageCreationAction" method="execute">
+            <result name="success">/package_view.jsp</result>
+        </action>
+
+        <action name="loadUserReceipts" class="by.bsuir.spp.action.receipt.LoadUserReceiptsAction" method="execute">
+            <result name="success">/user_receipts.jsp</result>
+        </action>
+
+        <action name="loadUserAdvertisements" class="by.bsuir.spp.action.advertisement.LoadUserAdvertisementsAction"
+                method="execute">
+            <result name="success">/user_advertisements.jsp</result>
+        </action>
+
+        <action name="loadUserSearchStatements"
+                class="by.bsuir.spp.action.searchstatement.LoadUserSearchStatementsAction" method="execute">
+            <result name="success">/user_searchstatements.jsp</result>
+        </action>
+
+        <action name="loadUserPrepaymentBooksAction"
+                class="by.bsuir.spp.action.prepaymentbook.LoadUserPrepaymentBooksAction" method="execute">
+            <result name="success">/user_prepayment_books.jsp</result>
+        </action>
+
+        <action name="addReceipt" class="by.bsuir.spp.action.receipt.AddReceiptAction" method="execute">
+            <result name="success">/payment_page.jsp</result>
+        </action>
+
+        <action name="payment" class="by.bsuir.spp.action.receipt.PaymentAction" method="execute">
+            <result name="success" type="chain">loadUserReceipts</result>
+        </action>
+
+        <action name="addPrepaymentBook" class="by.bsuir.spp.action.prepaymentbook.AddPrepaymentBookAction"
+                method="execute">
+            <result name="success" type="chain">loadUserPrepaymentBooksAction</result>
+        </action>
+
+        <action name="prepareDataForSearchStatementCreation"
+                class="by.bsuir.spp.action.searchstatement.PrepareDataForSearchStatementCreationAction"
+                method="execute">
+            <result name="success">/search_statement_view.jsp</result>
+        </action>
+
+        <action name="addSearchStatement" class="by.bsuir.spp.action.searchstatement.AddSearchStatementAction"
+                method="execute">
+            <result name="success" type="redirect">loadUserSearchStatements</result>
+        </action>
+
+        <!--<action name="selectAdvertisement" class="by.bsuir.spp.action.advertisement.SelectAdvertisementAction" method="execute">
+            <result name="success">/advertisement_view.jsp</result>
+        </action>-->
+
+    </package>
+
+    <package name="manager" namespace="/managerr" extends="user">
+
+        <interceptors>
+            <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="rolesInterceptor" class="by.bsuir.spp.interceptor.RolesInterceptor"/>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentication"/>
+                <interceptor-ref name="rolesInterceptor">
+                    <param name="roleActions">
+                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
+                        admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
+                        manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="authStack"/>
+
+        <global-results>
+            <result name="login" type="redirect">/login.jsp</result>
+        </global-results>
+
+        <action name="loadPackages" class="by.bsuir.spp.action._package.LoadPackagesAction" method="execute">
+            <result name="success">/packages.jsp</result>
+        </action>
+
+        <action name="loadAdvertisements" class="by.bsuir.spp.action.advertisement.LoadAdvertisementsAction"
+                method="execute">
+            <result name="success">/advertisements.jsp</result>
+        </action>
+
+        <action name="loadSearchStatements" class="by.bsuir.spp.action.searchstatement.LoadSearchStatementsAction"
+                method="execute">
+            <result name="success">/search_statements.jsp</result>
+        </action>
+
+        <action name="loadPrepaymentBooks" class="by.bsuir.spp.action.prepaymentbook.LoadPrepaymentBooksAction"
+                method="execute">
+            <result name="success">/prepayment_books.jsp</result>
+        </action>
+
+        <action name="addAdvertisement" class="by.bsuir.spp.action.advertisement.AddAdvertisementAction"
+                method="execute">
+            <result name="success" type="chain">loadAdvertisements</result>
+        </action>
+
+        <action name="prepareDataForAdvertisementCreation"
+                class="by.bsuir.spp.action.advertisement.PrepareDataForAdvertisementCreationAction" method="execute">
+            <result name="success">/advertisement_view.jsp</result>
+        </action>
+
+        <action name="rejectPackage" class="by.bsuir.spp.action._package.RejectPackageAction" method="execute">
+            <result name="success" type="chain">loadPackages</result>
+        </action>
+
+        <!--<action name="selectAdvertisement" class="by.bsuir.spp.action.advertisement.SelectAdvertisementAction" method="execute">
+            <result name="success">/advertisement_view.jsp</result>
+        </action>-->
+
+    </package>
+
 
 </struts>
