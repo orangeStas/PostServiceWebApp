@@ -8,6 +8,13 @@
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.convention.result.path" value="/"/>
 
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.Restful2ActionMapper" />
+
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+
     <package name="user" namespace="/" extends="struts-default">
         <interceptors>
             <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
@@ -16,7 +23,7 @@
                 <interceptor-ref name="authentication"/>
                 <interceptor-ref name="rolesInterceptor">
                     <param name="roleActions">
-                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        client: loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
                         *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
                         admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
                         manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
@@ -124,7 +131,7 @@
         </action>
     </package>
 
-    <package name="admin" namespace="/admin" extends="user">
+    <package name="admin" namespace="/admin" extends="user, json-default">
 
         <interceptors>
             <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
@@ -133,7 +140,7 @@
                 <interceptor-ref name="authentication"/>
                 <interceptor-ref name="rolesInterceptor">
                     <param name="roleActions">
-                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        client: loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
                         *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
                         admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
                         manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
@@ -180,8 +187,13 @@
             <result name="success" type="chain">loadUsers</result>
         </action>
 
-        <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+        <!--<action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
             <result name="success">/receipts.jsp</result>
+        </action>-->
+
+        <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="loadAdvertisements" class="by.bsuir.spp.action.advertisement.LoadAdvertisementsAction"
@@ -206,6 +218,13 @@
 
     </package>
 
+    <package name="default" namespace="/" extends="json-default">
+        <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
+    </package>
+
     <package name="client" namespace="/client" extends="user">
 
         <interceptors>
@@ -215,7 +234,7 @@
                 <interceptor-ref name="authentication"/>
                 <interceptor-ref name="rolesInterceptor">
                     <param name="roleActions">
-                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        client: loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
                         *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
                         admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
                         manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
@@ -233,9 +252,6 @@
         </global-results>
 
         <action name="loadUserPackages" class="by.bsuir.spp.action._package.LoadUserPackagesAction" method="execute">
-            <interceptor-ref name="roles">
-                <param name="allowedRoles">admin</param>
-            </interceptor-ref>
             <result name="success">/user_packages.jsp</result>
         </action>
 
@@ -306,10 +322,10 @@
                 <interceptor-ref name="authentication"/>
                 <interceptor-ref name="rolesInterceptor">
                     <param name="roleActions">
-                        client:  loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
+                        client: loadUserPackages, addPackage, prepareDataForPackageCreation, loadUserReceipts, loadUserAdvertisements, loadUserSearchStatements, loadUserPrepaymentBooksAction, addReceipt, payment, addPrepaymentBook, prepareDataForSearchStatementCreation, addSearchStatement;
                         *: downloadPackageDoc, downloadAdvertisementDoc, downloadPrepaymentBookDoc, downloadReceiptDoc, downloadSearchStatementDoc;
                         admin: selectAdvertisement, deleteAdvertisement, deleteReceipt, selectPrepaymentBook, deletePrepaymentBook, updatePrepaymentBook, updateSearchStatement, deleteSearchStatement, selectSearchStatement, loadPackages, selectPackage, deletePackage, loadUsers, selectUser, deleteUser, updateUser, loadReceipts, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, updateAdvertisement;
-                        manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
+                        post_manager: loadPackages, loadAdvertisements, loadSearchStatements, loadPrepaymentBooks, prepareDataForAdvertisementCreation, rejectPackage;
                     </param>
                 </interceptor-ref>
                 <interceptor-ref name="modelDriven"/>

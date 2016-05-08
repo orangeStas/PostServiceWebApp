@@ -1,0 +1,97 @@
+@import 'materialize';
+
+.collapsible-header.active{
+	background-color: rgba(30, 136, 229, 0.24);
+}
+
+footer.page-footer{
+	padding-top: 0;
+	margin-top: 0;
+}
+
+nav{
+	.brand-logo{
+		padding-left: 20px;
+	}
+
+	a{
+		margin-left: 20px;
+	}
+
+	div{
+		a{
+			margin-right: 5px;
+		}
+	}
+
+	div.row.right{
+		margin-right: 20px;
+		
+	}
+
+	i.material-icons.auth{
+		font-size: 1.3rem;
+		line-height: 2;
+	}
+
+	ul{
+		.user-name{
+			padding-left: 30px;
+			font-weight: 700;
+			font-size: 16px;
+		}
+	}
+}
+
+div.collapsible-body.item{
+	padding-top: 20px;
+}
+
+div.input-field{
+	.register{
+		padding-top: 10px;
+	}
+}
+
+body{
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+
+	.wrapper{
+		flex: 1 0 auto;
+
+		.container{
+
+			h3.logo{
+				padding-top: 100px;
+				color: #424242;
+			}
+
+			ul{
+				li{
+					.collapsible-header{
+						.item-header{
+							span{
+								margin-left: 4.9vw;
+							}
+						}
+					}
+
+					.collapsible-body{
+						.row{
+							span.package-align{
+								margin-left: 4.3vw;
+							}
+							form{
+								.btn-align{
+									margin-right: 1.5vw;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

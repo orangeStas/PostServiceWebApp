@@ -34,8 +34,8 @@
     <jsp:include page="/menu.jsp" />
 
     <div class="container row">
-        <h3 class="center-align col s12"><b>ПОШТА Сервис</b> - уникальный веб-сервис, который в разы упростит ваше привычное взаимодействие с  почтой.</h3>
-        <h3 class="center-align col s12"><b>ПОШТА Сервис</b> - проще не бывает.</h3>
+        <h3 class="center-align col s12 logo"><b>ПОШТА Сервис</b> - уникальный веб-сервис, который в разы упростит ваше привычное взаимодействие с  почтой.</h3>
+        <h3 class="center-align col s12 logo"><b>ПОШТА Сервис</b> - проще не бывает.</h3>
     </div>
 
 <jsp:include page="/footer.jsp" />
