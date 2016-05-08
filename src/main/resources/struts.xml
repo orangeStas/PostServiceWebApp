@@ -158,7 +158,8 @@
         </global-results>
 
         <action name="loadPackages" class="by.bsuir.spp.action._package.LoadPackagesAction" method="execute">
-            <result name="success">/packages.jsp</result>
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="selectPackage" class="by.bsuir.spp.action._package.SelectPackageAction" method="execute">
@@ -220,6 +221,22 @@
 
     <package name="default" namespace="/" extends="json-default">
         <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
+
+        <action name="loadPackages" class="by.bsuir.spp.action._package.LoadPackagesAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"/>
+        </action>
+
+        <action name="loadAdvertisements" class="by.bsuir.spp.action.advertisement.LoadAdvertisementsAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
+
+        <action name="loadSearchStatements" class="by.bsuir.spp.action.searchstatement.LoadSearchStatementsAction"
+                method="execute">
             <interceptor-ref name="json"/>
             <result name="success" type="json"></result>
         </action>

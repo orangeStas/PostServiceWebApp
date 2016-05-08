@@ -50,6 +50,12 @@
         <script src="<s:url value="/js/angular/app.js" />"></script>
         <script src="<s:url value="/js/angular/services/services.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.service.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/package/package.service.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.service.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/package/package.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.controller.js" />"></script>
 
     <jsp:include page="/footer.jsp"/>
