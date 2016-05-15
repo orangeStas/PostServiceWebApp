@@ -9,7 +9,9 @@ import by.bsuir.spp.dao.impl.MySqlPassportDao;
 import by.bsuir.spp.dao.impl.MySqlUserDao;
 import by.bsuir.spp.exception.dao.DaoException;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class SelectUserAction extends ActionSupport {
@@ -61,10 +63,12 @@ public class SelectUserAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+
+        HttpServletRequest request = ServletActionContext.getRequest();
         UserDao userDao = MySqlUserDao.getInstance();
         PassportDao passportDao = MySqlPassportDao.getInstance();
 
-        int userId = Integer.parseInt(getUser_id());
+        int userId = Integer.parseInt(request.getParameter("user_id"));
 
         User user = null;
 

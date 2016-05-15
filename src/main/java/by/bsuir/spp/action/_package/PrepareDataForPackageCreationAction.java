@@ -1,7 +1,10 @@
 package by.bsuir.spp.action._package;
 
 import by.bsuir.spp.bean.User;
+import by.bsuir.spp.controller.constant.RequestParameterName;
+import by.bsuir.spp.dao.impl.MySqlPassportDao;
 import by.bsuir.spp.dao.impl.MySqlUserDao;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.util.ArrayList;
@@ -11,6 +14,15 @@ public class PrepareDataForPackageCreationAction extends ActionSupport {
 
     private List<String> package_types = new ArrayList<>();
     private List<User> users;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<User> getUsers() {
         return users;
@@ -36,8 +48,17 @@ public class PrepareDataForPackageCreationAction extends ActionSupport {
 
         setPackage_types(package_types);
 
-        setUsers(MySqlUserDao.getInstance().getAllUsers());
+        setUser((User) ActionContext.getContext().getSession().get(RequestParameterName.USER));
 
+        List<User> users = (MySqlUserDao.getInstance().getAllUsers());
+
+        for (User user : users) {
+            user.setPassport(MySqlPassportDao.getInstance().read(user.getPassport().getPassportId()));
+        }
+
+        users.remove(getUser());
+
+        setUsers(users);
         return SUCCESS;
     }
 }

@@ -34,16 +34,12 @@
 </head>
 <body>
 
-<div class="wrapper" style="background-image: url(/image/blurred3.jpg);">
+<div class="wrapper" style="background-image: url(/image/blurred3.jpg); background-size: 100%">
 
     <jsp:include page="/menu.jsp"/>
     <div ng-view></div>
-    <div class="container row">
-        <h3 class="center-align col s12 logo"><b>ПОШТА Сервис</b> - уникальный веб-сервис, который в разы упростит ваше
-            привычное взаимодействие с почтой.</h3>
-        <h3 class="center-align col s12 logo"><b>ПОШТА Сервис</b> - проще не бывает.</h3>
-    </div>
-
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
         <script src="<s:url value="/js/lib/angular/angular.min.js" />"></script>
         <script src="<s:url value="/js/lib/angular/angular-route.min.js" />"></script>
         <script src="<s:url value="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-cookies.js" />"></script>
@@ -51,11 +47,17 @@
         <script src="<s:url value="/js/angular/services/services.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/package/package.service.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/prepaymentbook.service.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/user/user.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.controller.js" />"></script>
-        <script src="<s:url value="/js/angular/controllers/package/package.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/package/controllers/package.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.controller.js" />"></script>
-
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/prepaymentbook.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/user/controllers/user.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/user/controllers/select_user.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/user/controllers/update_user.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/logout.controller.js" />"></script>
     <jsp:include page="/footer.jsp"/>

@@ -62,12 +62,13 @@ public class AddPackageAction extends ActionSupport {
         Package myPackage = new Package();
         myPackage.setType(getPackage_type());
         myPackage.setDate(new Date());
-        myPackage.setSenderName(package_sender_name);
         myPackage.setGetterUser(new User(){{
             setId(Integer.parseInt(getPackage_getter_name()));
         }});
         myPackage.setAddress(getPackage_address());
-        myPackage.setPassportId(((User) ActionContext.getContext().getSession().get(RequestParameterName.USER)).getPassport().getPassportId());
+        User user = (User) ActionContext.getContext().getSession().get(RequestParameterName.USER);
+        myPackage.setSenderName(user.getFirstName() + " " + user.getSecondName());
+        myPackage.setPassportId(user.getPassport().getPassportId());
         myPackage.setPostIndex(Integer.parseInt(getPackage_post_index()));
 
         PackageDao packageDao = MySqlPackageDao.getInstance();

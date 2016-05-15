@@ -173,11 +173,16 @@
         </action>
 
         <action name="loadUsers" class="by.bsuir.spp.action.user.LoadUsersAction" method="execute">
-            <result name="success">/users.jsp</result>
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
 
-        <action name="selectUser" class="by.bsuir.spp.action.user.SelectUserAction" method="execute">
-            <result name="success">/user_view.jsp</result>
+        <action name="selectUser/*" class="by.bsuir.spp.action.user.SelectUserAction" method="execute">
+            <param name="user_id">{1}</param>
+            <interceptor-ref name="json">
+                <param name="enableSMD">true</param>
+            </interceptor-ref>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="deleteUser" class="by.bsuir.spp.action.user.DeleteUserAction" method="execute">
@@ -185,7 +190,10 @@
         </action>
 
         <action name="updateUser" class="by.bsuir.spp.action.user.UpdateUserAction" method="execute">
-            <result name="success" type="chain">loadUsers</result>
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result name="success" type="json"></result>
         </action>
 
         <!--<action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
@@ -199,17 +207,17 @@
 
         <action name="loadAdvertisements" class="by.bsuir.spp.action.advertisement.LoadAdvertisementsAction"
                 method="execute">
-            <result name="success">/advertisements.jsp</result>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="loadSearchStatements" class="by.bsuir.spp.action.searchstatement.LoadSearchStatementsAction"
                 method="execute">
-            <result name="success">/search_statements.jsp</result>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="loadPrepaymentBooks" class="by.bsuir.spp.action.prepaymentbook.LoadPrepaymentBooksAction"
                 method="execute">
-            <result name="success">/prepayment_books.jsp</result>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="updateAdvertisement" class="by.bsuir.spp.action.advertisement.UpdateAdvertisementAction"
@@ -221,6 +229,11 @@
 
     <package name="default" namespace="/" extends="json-default">
         <action name="loadReceipts" class="by.bsuir.spp.action.receipt.LoadReceiptsAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
+
+        <action name="loadUsers" class="by.bsuir.spp.action.user.LoadUsersAction" method="execute">
             <interceptor-ref name="json"/>
             <result name="success" type="json"></result>
         </action>
@@ -240,9 +253,14 @@
             <interceptor-ref name="json"/>
             <result name="success" type="json"></result>
         </action>
+
+        <action name="loadPrepaymentBooks" class="by.bsuir.spp.action.prepaymentbook.LoadPrepaymentBooksAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
     </package>
 
-    <package name="client" namespace="/client" extends="user">
+    <package name="client" namespace="/client" extends="user, json-default">
 
         <interceptors>
             <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
@@ -269,16 +287,21 @@
         </global-results>
 
         <action name="loadUserPackages" class="by.bsuir.spp.action._package.LoadUserPackagesAction" method="execute">
-            <result name="success">/user_packages.jsp</result>
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="addPackage" class="by.bsuir.spp.action._package.AddPackageAction" method="execute">
-            <result name="success" type="chain">loadUserPackages</result>
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="prepareDataForPackageCreation"
                 class="by.bsuir.spp.action._package.PrepareDataForPackageCreationAction" method="execute">
-            <result name="success">/package_view.jsp</result>
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="loadUserReceipts" class="by.bsuir.spp.action.receipt.LoadUserReceiptsAction" method="execute">
