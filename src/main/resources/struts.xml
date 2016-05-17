@@ -15,7 +15,7 @@
     <constant name="struts.enable.SlashesInActionNames" value="true" />
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
 
-    <package name="user" namespace="/" extends="struts-default">
+    <package name="user" namespace="/" extends="struts-default, json-default">
         <interceptors>
             <interceptor name="authentication" class="by.bsuir.spp.interceptor.AuthenticationInterceptor"/>
             <interceptor name="rolesInterceptor" class="by.bsuir.spp.interceptor.RolesInterceptor"/>
@@ -118,8 +118,16 @@
         </action>
 
         <action name="updateSearchStatement" class="by.bsuir.spp.action.searchstatement.UpdateSearchStatementAction" method="execute">
-            <result name="admin" type="redirect">/admin/loadSearchStatements.action</result>
-            <result name="manager" type="redirect">/managerr/loadSearchStatements.action</result>
+            <interceptor-ref name="json"/>
+            <result name="admin" type="json"></result>
+            <result name="manager" type="json"></result>
+        </action>
+
+        <action name="deletePackage" class="by.bsuir.spp.action._package.DeletePackageAction" method="execute">
+            <interceptor-ref name="json">
+                <param name="contentType">application/json</param>
+            </interceptor-ref>
+            <result name="success" type="json"></result>
         </action>
 
         <action name="deleteSearchStatement" class="by.bsuir.spp.action.searchstatement.DeleteSearchStatementAction" method="execute">
@@ -127,7 +135,13 @@
         </action>
 
         <action name="selectSearchStatement" class="by.bsuir.spp.action.searchstatement.SelectSearchStatementAction" method="execute">
-            <result name="success">/search_statement_view.jsp</result>
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
+        </action>
+
+        <action name="loadPackages" class="by.bsuir.spp.action._package.LoadPackagesAction" method="execute">
+            <interceptor-ref name="json"/>
+            <result name="success" type="json"></result>
         </action>
     </package>
 

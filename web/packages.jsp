@@ -74,7 +74,7 @@
 
                         <c:if test="${packagee.deleted == false}">
                             <form action="deletePackage.action" method="post">
-                                <input type="hidden" name="packageId" value="${packagee.idPackage}">
+                                <input type="hidden" name="package_id" value="${packagee.idPackage}">
                                 <button type="submit" class="waves-effect waves-light btn col s1 red lighten-1">
                                     <i class="material-icons">delete</i>
                                 </button>

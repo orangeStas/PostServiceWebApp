@@ -38,7 +38,9 @@ public class DownloadPackageDocAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        int packageId = Integer.parseInt(getPackage_id());
+        System.out.println("WE ARE HERE!!!");
+        HttpServletRequest request = ServletActionContext.getRequest();
+        int packageId = Integer.parseInt(request.getParameter("package_id"));
         PackageDao packageDao = MySqlPackageDao.getInstance();
         UserDao userDao = MySqlUserDao.getInstance();
         by.bsuir.spp.bean.document.Package myPackage = null;
@@ -53,9 +55,8 @@ public class DownloadPackageDocAction extends ActionSupport {
         String fileName = "Package_" + myPackage.getSenderName();
         fileName = URLEncoder.encode(fileName, "UTF-8");
 
-        String docType = getDoc_type();
+        String docType = request.getParameter("doc_type");
 
-        HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
 
         DocumentGenerator documentGenerator;

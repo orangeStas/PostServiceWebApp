@@ -18,10 +18,20 @@ import java.text.SimpleDateFormat;
 
 public class UpdateSearchStatementAction extends ActionSupport {
 
+    private SearchPackageStatement searchStatement;
+
+    public SearchPackageStatement getSearchStatement() {
+        return searchStatement;
+    }
+
+    public void setSearchStatement(SearchPackageStatement searchStatement) {
+        this.searchStatement = searchStatement;
+    }
+
     @Override
     public String execute() throws Exception {
         HttpServletRequest request = ServletActionContext.getRequest();
-        SearchPackageStatement packageStatement = getStatement(request);
+        SearchPackageStatement packageStatement = getSearchStatement();
 
         SearchStatementDao searchStatementDao = MySqlSearchStatementDao.getInstance();
         try {

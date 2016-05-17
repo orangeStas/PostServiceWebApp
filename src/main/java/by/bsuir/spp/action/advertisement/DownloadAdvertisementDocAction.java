@@ -53,8 +53,8 @@ public class DownloadAdvertisementDocAction extends ActionSupport {
         PassportDao passportDao = MySqlPassportDao.getInstance();
         UserDao userDao = MySqlUserDao.getInstance();
 
-        int idPackageOfAdvertisement = Integer.parseInt(getPackage_id());
-        String docType = getDoc_type();
+        int idPackageOfAdvertisement = Integer.parseInt(request.getParameter(RequestParameterName.PACKAGE_ID));
+        String docType = request.getParameter(RequestParameterName.DOC_TYPE);
 
         by.bsuir.spp.bean.document.Package packagee = packageDao.read(
                 Integer.parseInt(request.getParameter(RequestParameterName.PACKAGE_ID)));

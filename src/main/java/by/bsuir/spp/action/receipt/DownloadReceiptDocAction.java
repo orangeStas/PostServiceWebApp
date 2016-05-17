@@ -1,6 +1,7 @@
 package by.bsuir.spp.action.receipt;
 
 import by.bsuir.spp.bean.document.Receipt;
+import by.bsuir.spp.controller.constant.RequestParameterName;
 import by.bsuir.spp.dao.ReceiptDao;
 import by.bsuir.spp.dao.impl.MySqlReceiptDao;
 import by.bsuir.spp.documentgenerator.DocumentGenerator;
@@ -39,13 +40,13 @@ public class DownloadReceiptDocAction extends ActionSupport {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
 
-        int idReceipt = Integer.parseInt(getReceipt_id());
+        int idReceipt = Integer.parseInt(request.getParameter(RequestParameterName.RECEIPT_ID));
         ReceiptDao receiptDao = MySqlReceiptDao.getInstance();
         Receipt receipt = receiptDao.read(idReceipt);
 
         String fileName = URLEncoder.encode("Receipt_" + receipt.getClientName(), "UTF-8");
 
-        String docType = getDoc_type();
+        String docType = request.getParameter(RequestParameterName.DOC_TYPE);
         DocumentGenerator documentGenerator;
         switch (docType) {
             case "pdf": {

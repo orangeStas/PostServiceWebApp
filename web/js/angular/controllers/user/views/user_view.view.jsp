@@ -10,7 +10,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script>$('.collapsible').collapsible();</script>
+<script>
+    $(document).ready(function () {
+        $(".button-collapse").sideNav();
+        $('select').material_select();
+        $('.parallax').parallax();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+    });
+</script>
 <div class="container">
     <h3>Пользователь</h3>
 
@@ -149,17 +162,3 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-<script>$('.collapsible').collapsible();</script>
-<script>
-    $(document).ready(function () {
-        $(".button-collapse").sideNav();
-        $('select').material_select();
-        $('.parallax').parallax();
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
-        });
-    });
-</script>

@@ -19,28 +19,13 @@ public class DownloadPrepaymentBookDocAction extends ActionSupport {
     private String doc_type;
     private String prepayment_book_number;
 
-    public String getDoc_type() {
-        return doc_type;
-    }
-
-    public void setDoc_type(String doc_type) {
-        this.doc_type = doc_type;
-    }
-
-    public String getPrepayment_book_number() {
-        return prepayment_book_number;
-    }
-
-    public void setPrepayment_book_number(String prepayment_book_number) {
-        this.prepayment_book_number = prepayment_book_number;
-    }
 
     @Override
     public String execute() throws Exception {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
 
-        int bookNumber = Integer.parseInt(getPrepayment_book_number());
+        int bookNumber = Integer.parseInt(request.getParameter("prepayment_book_number"));
         PrepaymentBookDao prepaymentBookDao = MySqlPrepaymentBookDao.getInstance();
         PrepaymentBookStatement prepaymentBookStatement = prepaymentBookDao.read(bookNumber);
         String fileName = URLEncoder.encode("PrepaymentBook_" + prepaymentBookStatement.getClientName(), "UTF-8");

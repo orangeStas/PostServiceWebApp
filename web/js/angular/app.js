@@ -46,6 +46,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'js/angular/controllers/user/views/user_view.view.jsp',
             controller: 'SelectUserController'
         })
+        .when('/admin/selectSearchStatement.action/:statement_id', {
+            templateUrl: 'js/angular/controllers/searchstatement/views/search_statement_view.view.jsp',
+            controller: 'SelectSearchStatementController'
+        })
+        .when('/download/:package_id', {
+            controller: 'DownloadPackageController',
+            templateUrl: '/admin/loadPackages.action'
+        })
         .when('/admin/loadAdvertisements.action', {
             templateUrl: 'js/angular/controllers/advertisement/advertisements.view.jsp',
             controller: 'AdvertisementsController'

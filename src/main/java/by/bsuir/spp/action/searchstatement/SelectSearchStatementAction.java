@@ -7,7 +7,9 @@ import by.bsuir.spp.dao.SearchStatementDao;
 import by.bsuir.spp.dao.impl.MySqlPackageDao;
 import by.bsuir.spp.dao.impl.MySqlSearchStatementDao;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class SelectSearchStatementAction extends ActionSupport {
@@ -42,7 +44,8 @@ public class SelectSearchStatementAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        int statementId = Integer.parseInt(getSearch_statement_id());
+        HttpServletRequest request = ServletActionContext.getRequest();
+        int statementId = Integer.parseInt(request.getParameter("statement_id"));
         SearchStatementDao searchStatementDao = MySqlSearchStatementDao.getInstance();
         PackageDao packageDao = MySqlPackageDao.getInstance();
 

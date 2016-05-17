@@ -1,8 +1,3 @@
-<%@ page import="by.bsuir.spp.bean.document.Advertisement" %>
-<%@ page import="java.util.List" %>
-<%@ page import="by.bsuir.spp.dao.impl.MySqlAdvertisementDao" %>
-<%@ page import="by.bsuir.spp.controller.constant.RequestParameterName" %>
-<%@ page import="by.bsuir.spp.bean.User" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -53,7 +48,11 @@
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/package/controllers/package.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/package/controllers/download.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/package/controllers/delete_package.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/selectstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/updatesearchstatement.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/prepaymentbook/prepaymentbook.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/user/controllers/user.controller.js" />"></script>

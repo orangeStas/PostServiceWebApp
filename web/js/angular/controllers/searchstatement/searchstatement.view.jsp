@@ -27,13 +27,13 @@
 
                         <ul id='dropdown{{statement.id}}' class='dropdown-content'>
                             <li>
-                                <a href="downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=xls">XLS</a>
+                                <a href="/downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=xls" target="_self">XLS</a>
                             </li>
                             <li>
-                                <a href="downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=csv">CSV</a>
+                                <a href="/downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=csv" target="_self">CSV</a>
                             </li>
                             <li>
-                                <a href="downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=pdf">PDF</a>
+                                <a href="/downloadSearchStatementDoc.action?search_statement_id={{statement.id}}&doc_type=pdf" target="_self">PDF</a>
                             </li>
                         </ul>
 
@@ -52,14 +52,10 @@
 
                     <div class="row">
                         <span class="col s6 offset-s1"><b>Менеджер:</b> {{statement.postManagerName}} </span>
-
-                        <form action="/selectSearchStatement.action" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="search_statement_id" value="{{statement.id}}">
-                            <button type="submit"
-                                    class="waves-effect waves-light btn col s1 green lighten-1 right btn-align">
-                                <i class="material-icons">mode_edit</i>
-                            </button>
-                        </form>
+                        <a href="/admin/selectSearchStatement.action/{{statement.id}}"
+                           class="waves-effect waves-light btn col s1 green right btn-align">
+                            <i class="material-icons">mode_edit</i>
+                        </a>
                     </div>
 
                 </div>

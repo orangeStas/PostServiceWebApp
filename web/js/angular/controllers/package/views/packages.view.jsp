@@ -10,7 +10,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script>$('.collapsible').collapsible();</script>
 
 <div class="container">
     <h3>Посылки</h3>
@@ -52,13 +54,13 @@
 
                         <ul id='dropdown{{packagee.idPackage}}' class='dropdown-content'>
                             <li>
-                                <s:a href="%{xlsUrl}">XLS</s:a>
+                                <a href="/downloadPackageDoc.action?doc_type=xls&package_id={{packagee.idPackage}}" target="_self">XLS</a>
                             </li>
                             <li>
-                                <s:a href="%{pdfUrl}">PDF</s:a>
+                                <a href="/downloadPackageDoc.action?doc_type=pdf&package_id={{packagee.idPackage}}" target="_self">PDF</a>
                             </li>
                             <li>
-                                <s:a href="%{csvUrl}">CSV</s:a>
+                                <a href="/downloadPackageDoc.action?doc_type=csv&package_id={{packagee.idPackage}}" target="_self">CSV</a>
                             </li>
                         </ul>
 
@@ -67,9 +69,9 @@
                         <span class="col s6 offset-s1"><b>Отправитель:</b> {{packagee.senderName}}</span>
                         <span class="col s3 package-align"><b>Получатель:</b> {{packagee.getterUser.secondName}} {{packagee.getterUser.firstName}}</span>
 
-                        <form ng-if="packagee.deleted == false" action="deletePackage.action" method="post">
-                            <input type="hidden" name="packageId" value="{{packagee.idPackage}}">
-                            <button type="submit" class="waves-effect waves-light btn col s1 red lighten-1">
+                        <form ng-controller="DeletePackageController" ng-if="packagee.deleted == false"  accept-charset="UTF-8">
+                            <%--<input type="hidden" ng-model="packageDat.package_id" name="package_id" value="{{packagee.idPackage}}">--%>
+                            <button type="submit" ng-click="deletePackage(packagee.idPackage, $index)" name="action" class="waves-effect waves-light btn col s1 red lighten-1">
                                 <i class="material-icons">delete</i>
                             </button>
                         </form>
@@ -117,7 +119,5 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-<script>$('.collapsible').collapsible();</script>
+
 

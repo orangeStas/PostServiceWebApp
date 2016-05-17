@@ -24,32 +24,17 @@
                         <span class="col s4 offset-s1 package-align"><b>Номер клиента:</b> {{book.clientNumber}}</span>
 
                         <a class="waves-effect waves-light btn col s1 dropdown-button"
-                           data-activates='dropdown{{book.clientNumber}}'><i class="material-icons">file_download</i></a>
+                           data-activates='dropdown{{book.statementNumber}}'><i class="material-icons">file_download</i></a>
 
-                        <s:url action="downloadPrepaymentBookDoc" var="xlsUrl">
-                            <s:param name="doc_type">xls</s:param>
-                            <s:param name="prepayment_book_number">{{book.statementNumber}}</s:param>
-                        </s:url>
-
-                        <s:url action="downloadPrepaymentBookDoc" var="pdfUrl">
-                            <s:param name="doc_type">pdf</s:param>
-                            <s:param name="prepayment_book_number">{{book.statementNumber}}</s:param>
-                        </s:url>
-
-                        <s:url action="downloadPrepaymentBookDoc" var="csvUrl">
-                            <s:param name="doc_type">csv</s:param>
-                            <s:param name="prepayment_book_number">{{book.statementNumber}}</s:param>
-                        </s:url>
-
-                        <ul id='dropdown{{book.clientNumber}}' class='dropdown-content'>
+                        <ul id='dropdown{{book.statementNumber}}' class='dropdown-content'>
                             <li>
-                                <s:a href="%{xlsUrl}">XLS</s:a>
+                                <a href="/downloadPrepaymentBookDoc.action?doc_type=xls&prepayment_book_number={{book.statementNumber}}" target="_self">XLS</a>
                             </li>
                             <li>
-                                <s:a href="%{pdfUrl}">PDF</s:a>
+                                <a href="/downloadPrepaymentBookDoc.action?doc_type=pdf&prepayment_book_number={{book.statementNumber}}" target="_self">PDF</a>
                             </li>
                             <li>
-                                <s:a href="%{csvUrl}">CSV</s:a>
+                                <a href="/downloadPrepaymentBookDoc.action?doc_type=csv&prepayment_book_number={{book.statementNumber}}" target="_self">CSV</a>
                             </li>
                         </ul>
 

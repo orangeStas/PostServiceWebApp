@@ -28,13 +28,13 @@
 
                         <ul id='dropdown{{receipt.receiptId}}' class='dropdown-content'>
                             <li>
-                                <a href="downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=xls">XLS</a>
+                                <a href="/downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=xls" target="_self">XLS</a>
                             </li>
                             <li>
-                                <a href="downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=csv">CSV</a>
+                                <a href="/downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=csv" target="_self">CSV</a>
                             </li>
                             <li>
-                                <a href="downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=pdf">PDF</a>
+                                <a href="/downloadReceiptDoc.action?receipt_id={{receipt.receiptId}}&doc_type=pdf" target="_self">PDF</a>
                             </li>
                         </ul>
 
