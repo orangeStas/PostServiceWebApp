@@ -42,12 +42,9 @@
                         <span class="col s6 offset-s1"><b>Адрес:</b> {{statement.address}} </span>
                         <span class="col s3 package-align"><b>Телефон:</b> {{statement.phoneNumber}} </span>
 
-                        <form action="/deleteSearchStatement.action" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="search_statement_id" value="{{statement.id}}">
-                            <button type="submit" class="waves-effect waves-light btn col s1 red lighten-1">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </form>
+                        <a href="/admin/deleteSearchStatement.action/{{statement.id}}" class="waves-effect waves-light btn col s1 red lighten-1">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </div>
 
                     <div class="row">

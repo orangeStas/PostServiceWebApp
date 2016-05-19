@@ -81,7 +81,7 @@
 
         <div class="row right">
 
-            <a href="/loadSearchStatements.action" class="btn waves-effect waves-light light-blue lighten-1"><i class="material-icons">arrow_back</i></a>
+            <a href="/admin/loadSearchStatements.action" class="btn waves-effect waves-light light-blue lighten-1"><i class="material-icons">arrow_back</i></a>
 
             <button class="btn waves-effect waves-light" ng-click="updateSearchStatement()" type="submit" name="action">
                 <i class="material-icons">check</i>

@@ -1,13 +1,9 @@
 package by.bsuir.spp.action.receipt;
 
-import by.bsuir.spp.bean.User;
-import by.bsuir.spp.bean.UserType;
 import by.bsuir.spp.bean.document.Receipt;
-import by.bsuir.spp.controller.constant.RequestParameterName;
 import by.bsuir.spp.dao.ReceiptDao;
 import by.bsuir.spp.dao.impl.MySqlReceiptDao;
 import by.bsuir.spp.exception.dao.DaoException;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class DeleteReceiptAction extends ActionSupport {
@@ -33,15 +29,6 @@ public class DeleteReceiptAction extends ActionSupport {
             e.printStackTrace();
         }
 
-        UserType userType = ((User) ActionContext.getContext().getSession().get(RequestParameterName.USER)).getUserRole();
-
-        switch (userType) {
-            case ADMIN: {
-                return "admin";
-            }
-            default: {
-                return "client";
-            }
-        }
+        return "admin";
     }
 }

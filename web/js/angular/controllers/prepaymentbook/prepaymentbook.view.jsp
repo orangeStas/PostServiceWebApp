@@ -43,22 +43,18 @@
                         <span class="col s5 offset-s1"><b>Бухгалтер:</b> {{book.bookkeeperName}}</span>
                         <span class="col s4 package-align"><b>Дата:</b> {{book.date}} </span>
 
-                        <form action="deletePrepaymentBook.action" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="prepayment_book_number" value="{{book.statementNumber}}">
-                            <button type="submit" class="waves-effect waves-light btn col s1 red lighten-1">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </form>
+                        <a href="/admin/deletePrepaymentBook.action/{{book.statementNumber}}" class="waves-effect waves-light btn col s1 red lighten-1">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </div>
 
                     <div class="row">
-                        <form action="selectPrepaymentBook.action" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="prepayment_book_number" value="{{book.statementNumber}}">
-                            <button type="submit"
+<%--                            <input type="hidden" name="prepayment_book_number" value="{{book.statementNumber}}">--%>
+                            <%--<button type="submit"
                                     class="waves-effect waves-light btn col s1 green right btn-align lighten-1">
                                 <i class="material-icons">mode_edit</i>
-                            </button>
-                        </form>
+                            </button>--%>
+                            <a href="/selectPrepaymentBook.action/{{book.statementNumber}}" class="waves-effect waves-light btn col s1 green right btn-align lighten-1"><i class="material-icons">mode_edit</i></a>
                     </div>
 
                 </div>

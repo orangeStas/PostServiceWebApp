@@ -69,12 +69,9 @@
                         <span class="col s6 offset-s1"><b>Отправитель:</b> {{packagee.senderName}}</span>
                         <span class="col s3 package-align"><b>Получатель:</b> {{packagee.getterUser.secondName}} {{packagee.getterUser.firstName}}</span>
 
-                        <form ng-controller="DeletePackageController" ng-if="packagee.deleted == false"  accept-charset="UTF-8">
-                            <%--<input type="hidden" ng-model="packageDat.package_id" name="package_id" value="{{packagee.idPackage}}">--%>
-                            <button type="submit" ng-click="deletePackage(packagee.idPackage, $index)" name="action" class="waves-effect waves-light btn col s1 red lighten-1">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </form>
+                        <a href="/admin/deletePackage.action/{{packagee.idPackage}}" class="waves-effect waves-light btn col s1 red lighten-1">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </div>
 
                     <div class="row">

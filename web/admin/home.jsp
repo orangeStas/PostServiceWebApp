@@ -47,14 +47,19 @@
         <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.service.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/receipt/receipt.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/receipt/delete_receipt.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/package/controllers/package.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/package/controllers/download.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/package/controllers/delete_package.controller.js" />"></script>
-        <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.controller.js" />"></script>
-        <script src="<s:url value="/js/angular/controllers/searchstatement/selectstatement.controller.js" />"></script>
-        <script src="<s:url value="/js/angular/controllers/searchstatement/updatesearchstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/controllers/searchstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/controllers/selectstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/controllers/updatesearchstatement.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/searchstatement/controllers/delete_search_statement.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.controller.js" />"></script>
-        <script src="<s:url value="/js/angular/controllers/prepaymentbook/prepaymentbook.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/controllers/prepaymentbook.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/controllers/delete_book.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/controllers/selectprepaymentbook.controller.js" />"></script>
+        <script src="<s:url value="/js/angular/controllers/prepaymentbook/controllers/update_prepayment_book.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/user/controllers/user.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/user/controllers/select_user.controller.js" />"></script>
         <script src="<s:url value="/js/angular/controllers/user/controllers/update_user.controller.js" />"></script>

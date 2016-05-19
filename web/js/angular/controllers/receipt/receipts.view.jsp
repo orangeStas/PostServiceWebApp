@@ -42,13 +42,7 @@
                     <div class="row">
                         <span class="col s6 offset-s1"><b>Дата:</b> {{receipt.date}} </span>
 
-                        <form action="deleteReceipt.action" enctype="multipart/form-data" method="get">
-                            <input type="hidden" name="receipt_id" value="{{receipt.receiptId}}">
-                            <button type="submit"
-                                    class="waves-effect waves-light btn col s1 red lighten-1 right btn-align">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </form>
+                        <a href="/admin/deleteReceipt.action/{{receipt.receiptId}}" class="waves-effect waves-light btn col s1 red lighten-1 right btn-align"> <i class="material-icons">delete</i></a>
                     </div>
 
                 </div>

@@ -56,9 +56,9 @@
     <script src="<s:url value="/js/angular/controllers/receipt/receipt.controller.js" />"></script>
     <script src="<s:url value="/js/angular/controllers/package/controllers/package.controller.js" />"></script>
     <script src="<s:url value="/js/angular/controllers/package/controllers/preparepackagecreation.controller.js" />"></script>
-    <script src="<s:url value="/js/angular/controllers/searchstatement/searchstatement.controller.js" />"></script>
+    <script src="<s:url value="/js/angular/controllers/searchstatement/controllers/searchstatement.controller.js" />"></script>
     <script src="<s:url value="/js/angular/controllers/advertisement/advertisement.controller.js" />"></script>
-    <script src="<s:url value="/js/angular/controllers/prepaymentbook/prepaymentbook.controller.js" />"></script>
+    <script src="<s:url value="/js/angular/controllers/prepaymentbook/controllers/prepaymentbook.controller.js" />"></script>
     <script src="<s:url value="/js/angular/controllers/user/controllers/user.controller.js" />"></script>
     <script src="<s:url value="/js/angular/logout.controller.js" />"></script>
     <jsp:include page="/footer.jsp"/>
