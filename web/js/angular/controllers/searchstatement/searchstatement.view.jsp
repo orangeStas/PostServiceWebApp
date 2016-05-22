@@ -50,7 +50,7 @@
                     <div class="row">
                         <span class="col s6 offset-s1"><b>Менеджер:</b> {{statement.postManagerName}} </span>
                         <a href="/admin/selectSearchStatement.action/{{statement.id}}"
-                           class="waves-effect waves-light btn col s1 green right btn-align">
+                           class="waves-effect waves-light btn col s1 green right btn-align" style="margin-right: 1.9%">
                             <i class="material-icons">mode_edit</i>
                         </a>
                     </div>

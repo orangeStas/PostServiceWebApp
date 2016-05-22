@@ -42,7 +42,7 @@
                     <div class="row">
                         <span class="col s6 offset-s1"><b>Дата:</b> {{receipt.date}} </span>
 
-                        <a href="/admin/deleteReceipt.action/{{receipt.receiptId}}" class="waves-effect waves-light btn col s1 red lighten-1 right btn-align"> <i class="material-icons">delete</i></a>
+                        <a href="/admin/deleteReceipt.action/{{receipt.receiptId}}" class="waves-effect waves-light btn col s1 red lighten-1 left" style="margin-left: 31.33%"> <i class="material-icons">delete</i></a>
                     </div>
 
                 </div>

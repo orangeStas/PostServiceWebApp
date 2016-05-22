@@ -4,6 +4,7 @@ import by.bsuir.spp.bean.Passport;
 import by.bsuir.spp.bean.User;
 import by.bsuir.spp.bean.document.Advertisement;
 import by.bsuir.spp.bean.document.Package;
+import by.bsuir.spp.controller.constant.RequestParameterName;
 import by.bsuir.spp.dao.AdvertisementDao;
 import by.bsuir.spp.dao.PackageDao;
 import by.bsuir.spp.dao.PassportDao;
@@ -13,6 +14,9 @@ import by.bsuir.spp.dao.impl.MySqlPackageDao;
 import by.bsuir.spp.dao.impl.MySqlPassportDao;
 import by.bsuir.spp.dao.impl.MySqlUserDao;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class SelectAdvertisementAction extends ActionSupport {
     private Passport passport;
@@ -54,20 +58,24 @@ public class SelectAdvertisementAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+        HttpServletRequest request = ServletActionContext.getRequest();
+
         AdvertisementDao advertisementDao = MySqlAdvertisementDao.getInstance();
         PackageDao packageDao = MySqlPackageDao.getInstance();
         PassportDao passportDao = MySqlPassportDao.getInstance();
         UserDao userDao = MySqlUserDao.getInstance();
 
-        int idPackageOfAdvertisement = Integer.parseInt(getPackage_id());
+        int idPackageOfAdvertisement = Integer.parseInt(request.getParameter(RequestParameterName.PACKAGE_ID));
 
         by.bsuir.spp.bean.document.Package packagee = packageDao.read(idPackageOfAdvertisement);
         User user = userDao.read(packagee.getGetterUser().getId());
         packagee.setGetterUser(user);
         Passport passport = passportDao.read(packagee.getPassportId());
         Advertisement advertisement = advertisementDao.read(idPackageOfAdvertisement);
-        setPassport(passport);
-        setPackagee(packagee);
+        /*setPassport(passport);
+        setPackagee(packagee);*/
+        advertisement.setPassport(passport);
+        advertisement.setPostPackage(packagee);
         setAdvertisement(advertisement);
 
         return SUCCESS;

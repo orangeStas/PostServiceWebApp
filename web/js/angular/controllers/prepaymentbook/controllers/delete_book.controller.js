@@ -14,4 +14,4 @@ app.controller('DeletePrepaymentBookController', function ($scope, $routeParams,
             $scope.prepayment_books = data.data.prepayment_books;
         })
     })
-})
+});

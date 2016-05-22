@@ -55,26 +55,16 @@
 
                     </div>
                     <div class="row">
-                        <span class="col s6 offset-s1"><b>Номер паспорта:</b> {{advertisement.passport.passportNumber}}</span>
+                        <span class="col s10 offset-s1"><b>Номер паспорта:</b> {{advertisement.passport.passportNumber}}</span>
 
-                        <form action="deleteAdvertisement.action" method="get" enctype="multipart/form-data">
-                            <input type="hidden" name="package_id" value="{{advertisement.postPackage.idPackage}}">
-                            <button type="submit"
-                                    class="waves-effect waves-light btn col s1 red lighten-1 right btn-align">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </form>
+                        <a href="/deleteAdvertisement/{{advertisement.postPackage.idPackage}}" style="margin-left: -2.0%" class="waves-effect waves-light btn col s1 red lighten-1">
+                            <i class="material-icons">delete</i>
+                        </a>
+
                     </div>
 
                     <div class="row">
-
-                        <form action="selectAdvertisement.action" method="get" enctype="multipart/form-data">
-                            <input type="hidden" name="package_id" value="{{advertisement.postPackage.idPackage}}">
-                            <button type="submit"
-                                    class="waves-effect waves-light btn col s1 green lighten-1 right btn-align">
-                                <i class="material-icons">mode_edit</i>
-                            </button>
-                        </form>
+                        <a href="/admin/advertisement/{{advertisement.postPackage.idPackage}}" style="margin-left: 89.7%" class="waves-effect waves-light btn col s1 offset-s11 green lighten-1"><i class="material-icons">mode_edit</i></a>
                     </div>
 
                 </div>

@@ -50,6 +50,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'js/angular/controllers/searchstatement/views/search_statement_view.view.jsp',
             controller: 'SelectSearchStatementController'
         })
+        .when('/admin/advertisement/:package_id', {
+            templateUrl: 'js/angular/controllers/advertisement/views/advertisement_view.view.jsp',
+            controller: 'SelectAdvertisementController'
+        })
         .when('/selectPrepaymentBook.action/:book_id', {
             templateUrl: 'js/angular/controllers/prepaymentbook/views/prepaymentbook_view.view.jsp',
             controller : 'SelectPrepaymentBookController'
@@ -61,6 +65,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
         .when('/admin/deletePackage.action/:package_id', {
             templateUrl: 'js/angular/controllers/package/views/packages.view.jsp',
             controller : 'DeletePackageController'
+        })
+        .when('/deleteAdvertisement/:package_id', {
+            templateUrl: 'js/angular/controllers/advertisement/advertisements.view.jsp',
+            controller : 'DeleteAdvertisementController'
         })
         .when('/admin/deletePrepaymentBook.action/:book_id', {
             templateUrl: 'js/angular/controllers/prepaymentbook/prepaymentbook.view.jsp',

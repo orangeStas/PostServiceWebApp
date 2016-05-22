@@ -1,0 +1,23 @@
+.view{
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    transition: 300ms;
+}
+
+/* First animation*/
+.first .view.ng-enter{
+    left: -100%;
+}
+
+.first .view.ng-enter.ng-enter-active{
+    left: 0%;
+}
+
+.first .view.ng-leave{
+    left: 0%;
+}
+
+.first .view.ng-leave.ng-leave-active{
+    left: 100%;
+}

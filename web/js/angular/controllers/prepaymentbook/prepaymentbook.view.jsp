@@ -54,7 +54,7 @@
                                     class="waves-effect waves-light btn col s1 green right btn-align lighten-1">
                                 <i class="material-icons">mode_edit</i>
                             </button>--%>
-                            <a href="/selectPrepaymentBook.action/{{book.statementNumber}}" class="waves-effect waves-light btn col s1 green right btn-align lighten-1"><i class="material-icons">mode_edit</i></a>
+                            <a href="/selectPrepaymentBook.action/{{book.statementNumber}}" class="waves-effect waves-light btn col s1 offset-s11 green lighten-1" style="margin-left: 89.7%"><i class="material-icons">mode_edit</i></a>
                     </div>
 
                 </div>
